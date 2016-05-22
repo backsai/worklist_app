@@ -15,8 +15,8 @@ public class ForceOfflineReceiver extends BroadcastReceiver {
 
 		 
 	AlertDialog.Builder dialogBuilder= new AlertDialog.Builder(context);
-	dialogBuilder.setTitle("warning");
-	dialogBuilder.setMessage("You are forced to be offline.Plase try to login again. ");
+	dialogBuilder.setTitle("Note:");
+	dialogBuilder.setMessage("Delet worklist is ongoing... ");
 	dialogBuilder.setCancelable(false);
 	dialogBuilder.setPositiveButton("OK",new DialogInterface.OnClickListener(){
 		
