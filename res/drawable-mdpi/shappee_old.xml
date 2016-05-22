@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <gradient
+        android:startColor="#FFFFFF"
+        android:endColor="#FFFFFF"
+        android:angle="0"/>
+    <stroke
+        android:width="0.5dp"
+        android:color="#DEDCD2"/>
+    <corners
+        android:radius="2dp"/>
+    <padding
+        android:left="5dp"
+        android:top="5dp"
+        android:right="5dp"
+        android:bottom="5dp"/>
+<EditText 
+        
+        android:id="@+id/edittext1"
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content"
+        android:hint="test"
+        
+        
+        
+        
+        />   
+</shape>
