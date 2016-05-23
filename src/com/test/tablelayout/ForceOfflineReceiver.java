@@ -23,11 +23,13 @@ public class ForceOfflineReceiver extends BroadcastReceiver {
 		@Override
 		
 		public void onClick(DialogInterface dialog,int which){
+			
 			ActivityCollector.finishAll();
+			
 			Intent intent=new Intent(context,MainActivity.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intent);
-			
+			//ActivityCollector.removeActivity(MainActivity.this);
 		}
 	});
 	AlertDialog alertDialog = dialogBuilder.create();

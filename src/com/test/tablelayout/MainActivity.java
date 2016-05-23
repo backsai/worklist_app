@@ -84,7 +84,8 @@ public class MainActivity extends Activity {
 		acc_bk=acc_bkkk;
 		Date =(EditText)findViewById(R.id.Date);
 		Date.setText(t_bkk);
-		SharedPreferences pref1 = getSharedPreferences("data"+acc_bkstr+t_check,MODE_APPEND);
+		//SharedPreferences pref1 = getSharedPreferences("data"+acc_bkstr+t_check,MODE_PRIVATE);
+		SharedPreferences pref1 = getSharedPreferences("data"+acc_bkstr+t_check,MODE_PRIVATE);
 		//Toast.makeText(MainActivity.this, acc_bkkk+"", Toast.LENGTH_LONG).show();
 		//acc_bkkk =atoi(acc_bkk);
 		TableLayout tableLayout =(TableLayout)findViewById(R.id.TableLayout01);
@@ -167,16 +168,21 @@ public class MainActivity extends Activity {
 	
 		myButton1.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v) {
+			
 				String filename1=acc_bkstr+t_check;
 				String filename2="data"+acc_bkstr+t_check;
 				File f = new File("/data/data/com.test.tablelayout/files/"+filename1);  
-				File ff = new File("/data/data/com.test.tablelayout/shared_prefs/"+filename2);
+				File dd = new File("/data/data/com.test.tablelayout/shared_prefs/"+filename2+".xml");
                // File[] fl = f.listFiles();
                 f.delete(); 
-                ff.delete();
+                dd.delete();
+               // f.delete();
+                //ff.delete();
 			Toast.makeText(MainActivity.this,"/data/data/com.test.tablelayout/files/"+acc_bkstr+t_check, Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this,"/data/data/com.test.tablelayout/shared_prefs/"+filename2+".xml", Toast.LENGTH_LONG).show();
 			Intent intent = new Intent("com.test.tablelayout.FORCE_OFFLINE");
 			sendBroadcast(intent);
+			//ActivityCollector.finishAll();
 			}	
 		});
 	
@@ -184,7 +190,9 @@ public class MainActivity extends Activity {
 		
 		myButton2.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v) {
-				SharedPreferences.Editor editor =getSharedPreferences("data"+acc_bkstr+t_check,MODE_APPEND).edit();
+				save(acc_bk+"",acc_bkstr,t_bk);
+				save(t_bk,t_bkstr,"");
+				SharedPreferences.Editor editor =getSharedPreferences("data"+acc_bkstr+t_check,MODE_PRIVATE).edit();
 				for(int ii=0;ii<4;ii++){
 				int i =0;
 				if(ii != 2){for( i=0;i<acc_bk;i++)	{
@@ -362,8 +370,7 @@ class SpinnerSelectedListener implements OnItemSelectedListener{
 	protected void onDestroy(){
 		super.onDestroy();
 		//int acc_bkk =acc_bk;
-		save(acc_bk+"",acc_bkstr,t_bk);
-		save(t_bk,t_bkstr,"");
+	
 		ActivityCollector.removeActivity(this);
 	}
 	
