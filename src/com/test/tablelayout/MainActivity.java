@@ -65,6 +65,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		Button myButton = (Button) findViewById(R.id.myButton);
 		Button myButton1 =(Button) findViewById(R.id.myButton1);
+		Button myButton2 =(Button) findViewById(R.id.myButton2);
 		String t_bkk = load(t_bkstr,"");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
         final String t_check=format.format(new Date());
@@ -82,6 +83,7 @@ public class MainActivity extends Activity {
 		acc_bk=acc_bkkk;
 		Date =(EditText)findViewById(R.id.Date);
 		Date.setText(t_bkk);
+		SharedPreferences pref1 = getSharedPreferences("data"+acc_bkstr+t_check,MODE_APPEND);
 		//Toast.makeText(MainActivity.this, acc_bkkk+"", Toast.LENGTH_LONG).show();
 		//acc_bkkk =atoi(acc_bkk);
 		TableLayout tableLayout =(TableLayout)findViewById(R.id.TableLayout01);
@@ -102,6 +104,7 @@ public class MainActivity extends Activity {
 				tv0.setText(roworg+"");
 				tv0.setTextSize(10);
 				tableRow.addView(tv0);
+				tv0.setId(colorg*100+roworg);
 			}
 				else {
 					if (colorg==2) 
@@ -113,7 +116,7 @@ public class MainActivity extends Activity {
 			        
 			        //设置下拉列表的风格
 				    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			        
+			        //adapter.
 			        //将adapter 添加到spinner中
 				    spr.setAdapter(adapter);
 				    
@@ -123,24 +126,33 @@ public class MainActivity extends Activity {
 			        //设置默认值
 			        spr.setVisibility(View.VISIBLE);
 			        //spr.setTextSize(10);
+			    	
 					tableRow.addView(spr);
-					
+					spr.setId(colorg*100+roworg);
 					//view = (TextView) findViewById(R.id.spinnerText);
 				    //spinner = (Spinner) findViewById(R.id.Spinner01);
 				
 				   // tableRow.addView(bu);
-				
+					String row_col = pref1.getString(roworg+"_"+colorg,"");
+					int row_col_1 = pref1.getInt(roworg+"_"+colorg+"Int",0);
+					//Toast.makeText(MainActivity.this,roworg+"_"+colorg+"Int", Toast.LENGTH_LONG).show();
+					spr.setSelection(row_col_1);
+					//Toast.makeText(MainActivity.this,row_col_1+"", Toast.LENGTH_LONG).show();
+					
 				}
 				else
 				{
 					//EditText tv = (EditText) findViewById(R.drawable.edittext1);
 					EditText tv=new EditText(MainActivity.this);
 					tv.setBackgroundResource(R.drawable.shappee_old);
-					tv.setText("");
+					String row_col = pref1.getString(roworg+"_"+colorg,"");
+					tv.setText(row_col);
 					tv.setMaxWidth(10);
 					tv.setMaxLines(2);
 					tv.setTextSize(10);
+					tv.setId(colorg*100+roworg);
 					tableRow.addView(tv);
+					
 				}
 			}
 				
@@ -155,11 +167,12 @@ public class MainActivity extends Activity {
 		myButton1.setOnClickListener(new View.OnClickListener(){
 			public void onClick(View v) {
 				String filename1=acc_bkstr+t_check;
+				String filename2="data"+acc_bkstr+t_check;
 				File f = new File("/data/data/com.test.tablelayout/files/"+filename1);  
-                
+				File ff = new File("/data/data/com.test.tablelayout/files/"+filename2);
                // File[] fl = f.listFiles();
                 f.delete(); 
-			
+                ff.delete();
 			Toast.makeText(MainActivity.this,"/data/data/com.test.tablelayout/files/"+acc_bkstr+t_check, Toast.LENGTH_LONG).show();
 			Intent intent = new Intent("com.test.tablelayout.FORCE_OFFLINE");
 			sendBroadcast(intent);
@@ -168,7 +181,36 @@ public class MainActivity extends Activity {
 	
 		
 		
-		
+		myButton2.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v) {
+				SharedPreferences.Editor editor =getSharedPreferences("data"+acc_bkstr+t_check,MODE_APPEND).edit();
+				for(int ii=0;ii<4;ii++){
+				int i =0;
+				if(ii != 2){for( i=0;i<acc_bk;i++)	{
+				EditText sprEdit =(EditText) findViewById(ii*100+i);
+				String col_2 = sprEdit.getText().toString();
+				editor.putString(i+"_"+ii,col_2);
+			
+			//Toast.makeText(MainActivity.this,col_2, Toast.LENGTH_LONG).show();
+
+			}	
+			}
+				else
+			{	for( i=0;i<acc_bk;i++)	{
+				Spinner sprEdit2 =(Spinner) findViewById(ii*100+i);
+				String col_3 = sprEdit2.getSelectedItem().toString();
+				int col_4 =sprEdit2.getLastVisiblePosition();
+				editor.putString(i+"_"+ii,col_3);
+				editor.putInt(i+"_"+ii+"Int",col_4);
+				//Toast.makeText(MainActivity.this,col_3, Toast.LENGTH_LONG).show();
+
+			}
+			}
+			}
+				editor.commit();
+				Toast.makeText(MainActivity.this,"save_finish", Toast.LENGTH_LONG).show();
+			}
+		});
 		
 		
 		
@@ -207,7 +249,9 @@ public class MainActivity extends Activity {
 						tv0.setText(row+acc+"");
 						tv0.setTextSize(10);
 						tableRow.addView(tv0);
-					}
+						tv0.setId(col*100+acc+row);
+						//tv1.setId
+						}
 						else {
 							if (col==2) 
 						{  
@@ -221,7 +265,7 @@ public class MainActivity extends Activity {
 					        
 					        //将adapter 添加到spinner中
 						    spr.setAdapter(adapter);
-						    
+						   spr.setId(col*100+acc+row);
 						    //添加事件Spinner事件监听  
 					        //spr.setOnItemSelectedListener(new SpinnerSelectedListener());
 					         
@@ -234,6 +278,7 @@ public class MainActivity extends Activity {
 						    //spinner = (Spinner) findViewById(R.id.Spinner01);
 						
 						   // tableRow.addView(bu);
+							
 						
 						}
 						else
@@ -246,6 +291,7 @@ public class MainActivity extends Activity {
 							tv.setMaxLines(2);
 							tv.setTextSize(10);
 							tableRow.addView(tv);
+							tv.setId(col*100+acc+row);
 						}
 					}
 						//EditText tabledit=new EditText(MainActivity.this);

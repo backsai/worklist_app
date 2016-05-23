@@ -30,14 +30,21 @@
     android:id="@+id/myButton"
     android:layout_width="wrap_content"
     android:layout_height="40dip"
-    android:text="worklist_generate"
+    android:text="generate"
     android:textSize="10dip"
     />
 <Button
     android:id="@+id/myButton1"
     android:layout_width="wrap_content"
     android:layout_height="40dip"
-    android:text="delet_worklist"
+    android:text="delet"
+    android:textSize="10dip"
+    />
+<Button
+    android:id="@+id/myButton2"
+    android:layout_width="wrap_content"
+    android:layout_height="40dip"
+    android:text="save"
     android:textSize="10dip"
     />
 </TableRow>
