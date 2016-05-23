@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
 		Button myButton = (Button) findViewById(R.id.myButton);
 		Button myButton1 =(Button) findViewById(R.id.myButton1);
 		Button myButton2 =(Button) findViewById(R.id.myButton2);
+		Button myButton3 =(Button) findViewById(R.id.myButton3);
 		String t_bkk = load(t_bkstr,"");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
         final String t_check=format.format(new Date());
@@ -213,8 +214,18 @@ public class MainActivity extends Activity {
 		});
 		
 		
-		
-		
+		myButton3.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+			Intent intent = new Intent (MainActivity.this,historygetActivity.class);
+			startActivity(intent);
+			
+			
+			
+			}
+			
+			});
+			
 		myButton.setOnClickListener(new View.OnClickListener(){
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");  
 	        String t=format.format(new Date());

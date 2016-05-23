@@ -36,6 +36,12 @@
         
         
     </receiver>   
+    
+      <activity
+            android:name=".historygetActivity"
+         >
+           
+        </activity> 
     </application>
 
 </manifest>

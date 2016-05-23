@@ -33,18 +33,28 @@
     android:text="generate"
     android:textSize="10dip"
     />
+
 <Button
     android:id="@+id/myButton1"
     android:layout_width="wrap_content"
     android:layout_height="40dip"
-    android:text="delet"
+    android:text="delet list"
     android:textSize="10dip"
     />
+</TableRow>
+<TableRow>
 <Button
     android:id="@+id/myButton2"
     android:layout_width="wrap_content"
     android:layout_height="40dip"
     android:text="save"
+    android:textSize="10dip"
+    />
+<Button
+    android:id="@+id/myButton3"
+    android:layout_width="wrap_content"
+    android:layout_height="40dip"
+    android:text="history"
     android:textSize="10dip"
     />
 </TableRow>
