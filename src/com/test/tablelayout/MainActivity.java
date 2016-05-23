@@ -170,7 +170,7 @@ public class MainActivity extends Activity {
 				String filename1=acc_bkstr+t_check;
 				String filename2="data"+acc_bkstr+t_check;
 				File f = new File("/data/data/com.test.tablelayout/files/"+filename1);  
-				File ff = new File("/data/data/com.test.tablelayout/files/"+filename2);
+				File ff = new File("/data/data/com.test.tablelayout/shared_prefs/"+filename2);
                // File[] fl = f.listFiles();
                 f.delete(); 
                 ff.delete();
